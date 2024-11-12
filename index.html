@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ساعت زنده واوقات شرعی</title>
+    <title>اوقات شرعی ایران</title>
     <style>
         /* تنظیمات اولیه CSS Reset */
         * {
@@ -12,35 +12,36 @@
             box-sizing: border-box;
         }
 
-        /* تعریف متغیرهای رنگی */
+        /* متغیرهای رنگی برای تم تاریک و روشن */
         :root {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --header-bg-color: #009688;
-            --header-text-color: #ffffff;
-            --table-border-color: #dddddd;
-            --background-image-light: url('./back.jpg'); /* تصویر پس‌زمینه روشن */
-            --background-image-dark: url('./back2.jpg'); /* تصویر پس‌زمینه تاریک */
+            --bg-color-light: #ffffff;
+            --bg-color-dark: #121212;
+            --text-color-light: #333333;
+            --text-color-dark: #ffffff;
+            --header-bg-color-light: #009688;
+            --header-bg-color-dark: #555555;
+            --table-border-color-light: #dddddd;
+            --table-border-color-dark: #555555;
+            --image-light: url('./back.jpg');
+            --image-dark: url('./back2.jpg');
         }
 
         /* تم تاریک */
         .dark-theme {
-            --bg-color: #333333;
-            --text-color: #ffffff;
-            --header-bg-color: #555555;
-            --header-text-color: #009688;
-            --table-border-color: #555555;
-            background-image: var(--background-image-dark); /* تغییر تصویر پس‌زمینه در حالت تاریک */
+            --bg-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --header-bg-color: var(--header-bg-color-dark);
+            --table-border-color: var(--table-border-color-dark);
+            background-image: var(--image-dark);
         }
 
         /* تم روشن */
         .light-theme {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --header-bg-color: #009688;
-            --header-text-color: #ffffff;
-            --table-border-color: #dddddd;
-            background-image: var(--background-image-light); /* تغییر تصویر پس‌زمینه در حالت روشن */
+            --bg-color: var(--bg-color-light);
+            --text-color: var(--text-color-light);
+            --header-bg-color: var(--header-bg-color-light);
+            --table-border-color: var(--table-border-color-light);
+            background-image: var(--image-light);
         }
 
         /* استایل کلی صفحه */
@@ -53,19 +54,18 @@
             direction: rtl;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s, background-image 0.3s;
+            transition: background-color 0.3s, color 0.3s;
             padding: 0 2vw;
             margin: 0;
             flex-direction: column;
-            background-size: cover; /* سایز تصویر را طوری تنظیم می‌کند که تمام صفحه را بپوشاند */
-            background-position: center center; /* موقعیت تصویر را در وسط صفحه قرار می‌دهد */
-            background-repeat: no-repeat; /* از تکرار تصویر جلوگیری می‌کند */
+            background-size: cover;
+            background-position: center;
         }
 
         .prayer-times {
             width: 100%;
             max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.8); /* شفافیت پس‌زمینه برای کنتراست بهتر */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 3vw 4vw;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
@@ -76,16 +76,15 @@
 
         h2 {
             background-color: var(--header-bg-color);
-            color: var(--header-text-color);
+            color: var(--text-color);
             padding: 10px;
             border-radius: 5px;
             font-size: 1.5rem;
         }
 
-        .location-info, .time-info, .calendar-info {
+        .location-info, .time-info {
             margin: 1vh 0;
             font-size: 1.1rem;
-            color: var(--text-color);
         }
 
         table {
@@ -104,7 +103,7 @@
             margin-top: 2vh;
             padding: 1vh 2vw;
             background-color: var(--header-bg-color);
-            color: var(--header-text-color);
+            color: var(--text-color);
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -126,14 +125,6 @@
                 padding: 3vw;
             }
         }
-
-        /* استایل برای بسمه تعالی و سازنده */
-        .header-text, .footer-text {
-            font-size: 1.2rem;
-            text-align: center;
-            margin: 3vh 0;
-            color: var(--text-color);
-        }
     </style>
 </head>
 <body class="light-theme">
@@ -142,7 +133,19 @@
 
     <div class="prayer-times">
         <h2>اوقات شرعی و ساعت زنده</h2>
-        <div class="location-info" id="location-info">در حال شناسایی موقعیت...</div>
+
+        <!-- انتخاب استان و شهر -->
+        <label for="city-select">انتخاب شهر:</label>
+        <select id="city-select" onchange="updatePrayerTimes()">
+            <option value="tehran">تهران</option>
+            <option value="mashhad">مشهد</option>
+            <option value="isfahan">اصفهان</option>
+            <option value="shiraz">شیراز</option>
+            <option value="tabriz">تبریز</option>
+            <!-- می‌توانید این لیست را گسترش دهید -->
+        </select>
+
+        <div class="location-info" id="location-info">شهر: تهران</div>
         <div class="time-info" id="live-time">ساعت زنده: --:--:--</div>
         <table>
             <thead>
@@ -187,58 +190,63 @@
     <div class="footer-text">سازنده: محمد جواد جونبخش</div>
 
     <script>
-        let timezone = null;
+        // اطلاعات اوقات شرعی برای هر شهر (مثال: تهران)
+        const prayerTimesData = {
+            tehran: {
+                fajr: "05:00",
+                sunrise: "06:30",
+                dhuhr: "12:00",
+                maghrib: "17:30",
+                isha: "19:00",
+                gregorian: "2024/11/12",
+                shamsi: "1403/08/22",
+                hijri: "1446/04/26"
+            },
+            mashhad: {
+                fajr: "05:10",
+                sunrise: "06:40",
+                dhuhr: "12:10",
+                maghrib: "17:40",
+                isha: "19:10",
+                gregorian: "2024/11/12",
+                shamsi: "1403/08/22",
+                hijri: "1446/04/26"
+            },
+            isfahan: {
+                fajr: "05:15",
+                sunrise: "06:45",
+                dhuhr: "12:15",
+                maghrib: "17:45",
+                isha: "19:15",
+                gregorian: "2024/11/12",
+                shamsi: "1403/08/22",
+                hijri: "1446/04/26"
+            },
+            // برای سایر شهرها اطلاعات مشابه می‌توانید اضافه کنید.
+        };
 
-        // شناسایی موقعیت جغرافیایی بر اساس IP
-        async function getLocation() {
-            try {
-                const response = await fetch("http://ip-api.com/json/");
-                const data = await response.json();
-                const { city, country, lat, lon, timezone: userTimezone } = data;
-                timezone = userTimezone;
-                document.getElementById("location-info").innerText = `شهر: ${city}, کشور: ${country}`;
-                
-                // دریافت تاریخ‌های مختلف و اوقات شرعی
-                getDate(lat, lon);
-                // شروع ساعت زنده بر اساس منطقه زمانی کاربر
-                startLiveTime();
-            } catch (error) {
-                document.getElementById("location-info").innerText = "شناسایی موقعیت ممکن نیست.";
-                console.error("خطا در شناسایی موقعیت:", error);
-            }
+        // تابع به‌روزرسانی اوقات شرعی و تاریخ‌ها بر اساس انتخاب شهر
+        function updatePrayerTimes() {
+            const city = document.getElementById("city-select").value;
+            const times = prayerTimesData[city];
+
+            // نمایش اوقات شرعی
+            document.getElementById("fajr-time").innerText = times.fajr;
+            document.getElementById("sunrise-time").innerText = times.sunrise;
+            document.getElementById("dhuhr-time").innerText = times.dhuhr;
+            document.getElementById("maghrib-time").innerText = times.maghrib;
+            document.getElementById("isha-time").innerText = times.isha;
+
+            // تاریخ‌ها
+            document.getElementById("gregorian-date").innerText = times.gregorian;
+            document.getElementById("shamsi-date").innerText = times.shamsi;
+            document.getElementById("hijri-date").innerText = times.hijri;
+
+            // تغییر اطلاعات مکان
+            document.getElementById("location-info").innerText = `شهر: ${city.charAt(0).toUpperCase() + city.slice(1)}`;
         }
 
-        // دریافت تاریخ‌های میلادی، شمسی و قمری و اوقات شرعی
-        async function getDate(latitude, longitude) {
-            try {
-                const response = await fetch(`http://api.aladhan.com/v1/gToH?latitude=${latitude}&longitude=${longitude}`);
-                const data = await response.json();
-                const hijriDate = data.data.hijri;
-                const gregorianDate = new Date().toLocaleDateString("fa-IR", { timeZone: timezone });
-                const shamsiDate = `${hijriDate.day} ${hijriDate.month.ar} ${hijriDate.year}`;
-
-                // نمایش تاریخ‌ها
-                document.getElementById("gregorian-date").innerText = gregorianDate;
-                document.getElementById("shamsi-date").innerText = shamsiDate;
-                document.getElementById("hijri-date").innerText = `${hijriDate.day} ${hijriDate.month.ar} ${hijriDate.year}`;
-
-                // دریافت اوقات شرعی
-                const prayerTimesResponse = await fetch(`http://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=8`);
-                const prayerTimesData = await prayerTimesResponse.json();
-                const timings = prayerTimesData.data.timings;
-
-                // نمایش اوقات شرعی
-                document.getElementById("fajr-time").innerText = timings.Fajr;
-                document.getElementById("sunrise-time").innerText = timings.Sunrise;
-                document.getElementById("dhuhr-time").innerText = timings.Dhuhr;
-                document.getElementById("maghrib-time").innerText = timings.Maghrib;
-                document.getElementById("isha-time").innerText = timings.Isha;
-            } catch (error) {
-                console.error("خطا در دریافت تاریخ یا اوقات شرعی:", error);
-            }
-        }
-
-        // شروع ساعت زنده
+        // تابع ساعت زنده
         function startLiveTime() {
             setInterval(function() {
                 const now = new Date();
@@ -249,14 +257,14 @@
             }, 1000);
         }
 
-        // تغییر تم سایت
+        // تغییر تم
         function toggleTheme() {
             document.body.classList.toggle('dark-theme');
             document.body.classList.toggle('light-theme');
         }
 
-        // اجرا در بارگذاری اولیه صفحه
-        getLocation();
+        // شروع زمان زنده
+        startLiveTime();
     </script>
 </body>
 </html>
