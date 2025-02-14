@@ -15,19 +15,22 @@
     --header-bg-color-dark: #555555;
     --table-border-color-light: #dddddd;
     --table-border-color-dark: #555555;
-    .light-theme {
-        --bg-image: var(--image-light);
-        --image-light: url('./back2.jpg');
+      .dark-theme {
+        --bg-image: var(--image-dark);
+        --image-dark: url('./back2.jpg');
+    }
+    back.jpg');
         :root {
             --bg-image: var(--image-dark); /* یا var(--image-dark) اگر تم پیش‌فرض تاریکه */
         }
+    .light-theme {
+        
+        --bg-image: var(--image-light);
+        --image-light: url('./
         
     }
     
-    .dark-theme {
-        --bg-image: var(--image-dark);
-        --image-dark: url('./back.jpg');
-    }
+  
     
 }
 
