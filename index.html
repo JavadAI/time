@@ -2,196 +2,29 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="./Time.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اوقات شرعی ایران</title>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TN454BLM');</script>
-    <!-- End Google Tag Manager -->
-    <style>
-        /* تنظیمات اولیه CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* متغیرهای رنگی برای تم تاریک و روشن */
-        :root {
-            --bg-color-light: #ffffff;
-            --bg-color-dark: #121212;
-            --text-color-light: #333333;
-            --text-color-dark: #ffffff;
-            --header-bg-color-light: #009688;
-            --header-bg-color-dark: #555555;
-            --table-border-color-light: #dddddd;
-            --table-border-color-dark: #555555;
-            --image-light: url('./back.jpg');
-            --image-dark: url('./back2.jpg');
-        }
-
-        /* تم تاریک */
-        .dark-theme {
-            --bg-color: var(--bg-color-dark);
-            --text-color: var(--text-color-dark);
-            --header-bg-color: var(--header-bg-color-dark);
-            --table-border-color: var(--table-border-color-dark);
-            background-image: var(--image-dark);
-        }
-
-        /* تم روشن */
-        .light-theme {
-            --bg-color: var(--bg-color-light);
-            --text-color: var(--text-color-light);
-            --header-bg-color: var(--header-bg-color-light);
-            --table-border-color: var(--table-border-color-light);
-            background-image: var(--image-light);
-        }
-
-
-body{
-
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN454BLM"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->}
-*{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-        /* استایل کلی صفحه */
-
-        body {
-
-
-
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            direction: rtl;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            padding: 0 2vw;
-            margin: 0;
-            flex-direction: column;
-            background-size: cover;
-            background-position: center;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        .prayer-times {
-            width: 100%;
-            max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 3vw 4vw;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-            margin-top: 2vh;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        h2 {
-            background-color: var(--header-bg-color);
-            color: var(--text-color);
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 1.5rem;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        .location-info, .time-info {
-            margin: 1vh 0;
-            font-size: 1.1rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 3vh;
-        }
-
-        th, td {
-            padding: 2vh;
-            border: 1px solid var(--table-border-color);
-            text-align: center;
-        }
-
-        .theme-toggle {
-            margin-top: 2vh;
-            padding: 1vh 2vw;
-            background-color: var(--header-bg-color);
-            color: var(--text-color);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* ریسپانسیو: برای موبایل */
-        @media (max-width: 600px) {
-            .prayer-times {
-                padding: 5vw;
-            }
-            h2 {
-                font-size: 1.2rem;
-            }
-            .location-info, .time-info {
-                font-size: 1rem;
-            }
-            th, td {
-                padding: 3vw;
-            }
-        }
-        .header-text{
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        }
-    </style>
+    <title>ساعت زنده ایران</title>
+    <link rel="shortcut icon" href="./Time.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="light-theme">
-    <!-- بخش ابتدای سایت: بسمه تعالی -->
+
     <div class="header-text">بسمه تعالی</div>
 
     <div class="prayer-times">
         <h2>اوقات شرعی و ساعت زنده</h2>
 
-        <!-- انتخاب استان و شهر -->
-        <label for="city-select">انتخاب شهر:</label>
-        <select id="city-select" onchange="updatePrayerTimes()">
-            <option value="tehran">تهران</option>
-            <option value="mashhad">مشهد</option>
-            <option value="isfahan">اصفهان</option>
-            <option value="shiraz">شیراز</option>
-            <option value="tabriz">تبریز</option>
-            <!-- می‌توانید این لیست را گسترش دهید -->
+        <label for="province-select">انتخاب استان:</label>
+        <select id="province-select" onchange="updatePrayerTimes()">
+            <option value="Tehran">تهران</option>
+            <option value="Mashhad">مشهد</option>
+            <option value="Isfahan">اصفهان</option>
+            <option value="Shiraz">شیراز</option>
+            <option value="Tabriz">تبریز</option>
         </select>
 
-        <div class="location-info" id="location-info">شهر: تهران</div>
         <div class="time-info" id="live-time">ساعت زنده: --:--:--</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>تاریخ میلادی</th>
-                    <th>تاریخ هجری شمسی</th>
-                    <th>تاریخ هجری قمری</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="gregorian-date">--/--/----</td>
-                    <td id="shamsi-date">--/--/----</td>
-                    <td id="hijri-date">--/--/----</td>
-                </tr>
-            </tbody>
-        </table>
+
         <table>
             <thead>
                 <tr>
@@ -212,88 +45,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </tr>
             </tbody>
         </table>
+
         <button class="theme-toggle" onclick="toggleTheme()">تغییر تم</button>
     </div>
 
-    <!-- بخش انتهای سایت: سازنده -->
-    <div class="footer-text">سازنده: محمد جواد جونبخش</div>
-
-    <script>
-        // اطلاعات اوقات شرعی برای هر شهر (مثال: تهران)
-        const prayerTimesData = {
-            tehran: {
-                fajr: "05:00",
-                sunrise: "06:30",
-                dhuhr: "12:00",
-                maghrib: "17:30",
-                isha: "19:00",
-                gregorian: "2024/11/12",
-                shamsi: "1403/08/22",
-                hijri: "1446/04/26"
-            },
-            mashhad: {
-                fajr: "05:10",
-                sunrise: "06:40",
-                dhuhr: "12:10",
-                maghrib: "17:40",
-                isha: "19:10",
-                gregorian: "2024/11/12",
-                shamsi: "1403/08/22",
-                hijri: "1446/04/26"
-            },
-            isfahan: {
-                fajr: "05:15",
-                sunrise: "06:45",
-                dhuhr: "12:15",
-                maghrib: "17:45",
-                isha: "19:15",
-                gregorian: "2024/11/12",
-                shamsi: "1403/08/22",
-                hijri: "1446/04/26"
-            },
-            // برای سایر شهرها اطلاعات مشابه می‌توانید اضافه کنید.
-        };
-
-        // تابع به‌روزرسانی اوقات شرعی و تاریخ‌ها بر اساس انتخاب شهر
-        function updatePrayerTimes() {
-            const city = document.getElementById("city-select").value;
-            const times = prayerTimesData[city];
-
-            // نمایش اوقات شرعی
-            document.getElementById("fajr-time").innerText = times.fajr;
-            document.getElementById("sunrise-time").innerText = times.sunrise;
-            document.getElementById("dhuhr-time").innerText = times.dhuhr;
-            document.getElementById("maghrib-time").innerText = times.maghrib;
-            document.getElementById("isha-time").innerText = times.isha;
-
-            // تاریخ‌ها
-            document.getElementById("gregorian-date").innerText = times.gregorian;
-            document.getElementById("shamsi-date").innerText = times.shamsi;
-            document.getElementById("hijri-date").innerText = times.hijri;
-
-            // تغییر اطلاعات مکان
-            document.getElementById("location-info").innerText = `شهر: ${city.charAt(0).toUpperCase() + city.slice(1)}`;
-        }
-
-        // تابع ساعت زنده
-        function startLiveTime() {
-            setInterval(function() {
-                const now = new Date();
-                const hours = now.getHours().toString().padStart(2, '0');
-                const minutes = now.getMinutes().toString().padStart(2, '0');
-                const seconds = now.getSeconds().toString().padStart(2, '0');
-                document.getElementById("live-time").innerText = `ساعت زنده: ${hours}:${minutes}:${seconds}`;
-            }, 1000);
-        }
-
-        // تغییر تم
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            document.body.classList.toggle('light-theme');
-        }
-
-        // شروع زمان زنده
-        startLiveTime();
-    </script>
+    <div class="footer-text">تمام حقوق محفوظ است © 2025</div>
+    <div class="footer-text">سازنده :محمد جواد حونبخش</div>
+    <div class="footer-text"><a href="https://javadai.github.io/Javad.com/">Business information card/کارت اطلاعات کاری</a></div>
+    <script src="script.js"></script>
 </body>
 </html>
